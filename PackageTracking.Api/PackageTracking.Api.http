@@ -1,0 +1,31 @@
+@host = https://localhost:7006
+# If your app shows a different port in Swagger/Output, set it here.
+# Example: @host = https://localhost:5001  or  http://localhost:5074
+
+### List packages (optional filters)
+GET {{host}}/api/packages?tracking=&status=&page=1&pageSize=20
+Accept: application/json
+
+### Create a package
+POST {{host}}/api/packages
+Content-Type: application/json
+Accept: application/json
+
+{
+  "sender":   { "name": "Alice", "address": "1 A St", "phone": "+37061111111" },
+  "recipient":{ "name": "Bob",   "address": "2 B Ave", "phone": "+37062222222" }
+}
+
+### Get by id (replace 1 with the id you received from Create)
+GET {{host}}/api/packages/1
+Accept: application/json
+
+### Get by tracking number (replace the value)
+GET {{host}}/api/packages/by-tracking/25DDD-ABC123
+Accept: application/json
+
+### Change status (replace 1 with your id; pick an allowed next status)
+POST {{host}}/api/packages/1/status
+Content-Type: application/json
+
+{ "newStatus": "Sent" }
